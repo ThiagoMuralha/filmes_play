@@ -1,8 +1,6 @@
 # Application dependencies
 
 require:
-	- play 2.5
-	- javax.persistence -> persistence-api 1.0.2
 
 repositories:
 	- Maven local repository:

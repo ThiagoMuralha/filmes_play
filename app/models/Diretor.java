@@ -1,16 +1,15 @@
 package models;
 
 import javax.persistence.*;
-import play.validation.Constraints;
-import play.db.ebean.Model;
+import play.data.validation.Constraints;
+import com.avaje.ebean.Model;
 
 @Entity
 public class Diretor extends Model {
-
+	
 	private static final long serialVersionUID = 1l;
 
-	@id
-	@GeneratedValue
+	@Id
 	public Long id;
 
 	@Constraints.Required
