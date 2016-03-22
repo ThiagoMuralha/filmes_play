@@ -1,6 +1,7 @@
 # Application dependencies
 
 require:
+	- play 2.5.0
 
 repositories:
 	- Maven local repository:

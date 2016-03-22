@@ -1,4 +1,4 @@
-@(diretores: java.util.List<models.Diretor>)
+@(diretores: java.util.List[models.Diretor])
 @main("Diretores") {
 <div class="container">
 	<div class="header">
@@ -14,8 +14,8 @@
 			@for(diretor <- diretores) {
 			<tr>
 				<th>G 
-					<a href="#">
-						@diretor.nome
+					<a href="@routes.DiretorCRUD.detalhar(diretor.getId())">
+						@diretor.getNome()
 					</a>
 				</th>
 			</tr>
