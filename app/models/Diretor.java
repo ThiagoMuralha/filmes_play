@@ -3,18 +3,36 @@ package models;
 import javax.persistence.*;
 import play.validation.Constraints;
 import play.db.ebean.Model;
+import play.data.validation.Constraints;
+import com.avaje.ebean.Model;
 
 @Entity
 public class Diretor extends Model {
-
+	
 	private static final long serialVersionUID = 1l;
 
-	@id
-	@GeneratedValue
-	public Long id;
+	public static Finder<Long, Diretor> find = new Finder<Long, Diretor>(Diretor.class);
 
+	@Id
+	private Long id;
 	@Constraints.Required
-	public String nome;
+	private String nome;
+	
+	// getters e setters
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-	public static Model.Finder<Long, Diretor> find = new Model.Finder<Long, Diretor>(Long.class, Diretor.class);
+	public String toString() {
+		return "nome = " + this.nome + " e ID = " + this.id;
+	}
 }

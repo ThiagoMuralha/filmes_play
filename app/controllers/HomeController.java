@@ -1,8 +1,9 @@
 package controllers;
 
 import play.*;
+import java.util.List;
+import models.Diretor;
 import play.mvc.*;
-
 import views.html.*;
 
 /**
@@ -11,6 +12,8 @@ import views.html.*;
  */
 public class HomeController extends Controller {
 
+	List<Diretor> diretores = Diretor.find.findList();
+	
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
