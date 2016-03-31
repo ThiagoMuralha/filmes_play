@@ -2,11 +2,7 @@ name := """filmes"""
 
 version := "1.0-SNAPSHOT"
 
-<<<<<<< HEAD
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
-=======
 lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
->>>>>>> 522874cc3a8dd6721b78352338112bf6bf09d8ba
 
 scalaVersion := "2.11.7"
 

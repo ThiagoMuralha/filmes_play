@@ -1,10 +1,9 @@
 package models;
 
 import javax.persistence.*;
-import play.validation.Constraints;
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import play.data.validation.Constraints;
-import com.avaje.ebean.Model;
 
 @Entity
 public class Diretor extends Model {
