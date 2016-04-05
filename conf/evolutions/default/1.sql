@@ -19,11 +19,12 @@ create table filme (
   genero                    varchar(255),
   votos                     integer,
   url                       varchar(255),
+  diretor_id                bigint,
   constraint pk_filme primary key (id))
 ;
 
-alter table filme add constraint fk_filme_diretor_1 foreign key (id) references diretor (id) on delete restrict on update restrict;
-create index ix_filme_diretor_1 on filme (id);
+alter table filme add constraint fk_filme_diretor_1 foreign key (diretor_id) references diretor (id) on delete restrict on update restrict;
+create index ix_filme_diretor_1 on filme (diretor_id);
 
 
 

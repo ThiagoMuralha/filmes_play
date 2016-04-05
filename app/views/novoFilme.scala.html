@@ -1,6 +1,37 @@
-@(diretores: java.util.List[models.Diretor])
-@main("Diretores") {
-<div class="container">
-	A fazer
-</div>
+@(filmeForm: play.data.Form[models.Filme])
+@main("Novo filme") {
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="/">Home</a></li>
+			</ul>
+		</div>
+		<div>
+			@helper.form(action = routes.FilmeCRUD.gravar(), 'id -> "myForm", 'class -> "form-horizontal") {
+				<fieldset>
+					<legend>Novo filme</legend>
+					<div class="control-group">
+						<div class="controls">
+							@helper.inputText(filmeForm("Nome"), 'id -> "nome")
+							@helper.inputText(filmeForm("Ano"), 'id -> "ano")
+							@helper.inputText(filmeForm("Tipo"), 'id -> "tipo")
+							@helper.inputText(filmeForm("Nota"), 'id -> "nota")
+							@helper.inputText(filmeForm("Duração"), 'id -> "duracao")
+							@helper.inputText(filmeForm("Gênero"), 'id -> "genero")
+							@helper.inputText(filmeForm("Votos"), 'id -> "votos")
+							@helper.inputText(filmeForm("URL"), 'id -> "url")
+							@helper.inputText(filmeForm("ID do diretor"), 'id -> "diretor_id")
+						</div>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label" for="singlebutton"></label>
+					<div class="controls">
+						<button id="singlebutton" name="singlebutton"
+							class="btn btn-primary">Gravar</button>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 }

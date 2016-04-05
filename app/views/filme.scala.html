@@ -1,6 +1,26 @@
 @(filmes: java.util.List[models.Filme])
 @main("Filmes") {
 <div class="container">
-	A fazer
+	<div class="header">
+		<ul class="nav nav-pills pull-right">
+			<li class="active"><a href="@routes.FilmeCRUD.novoFilme()">Novo	filme</a></li>
+			<li class="active"><a href="/">Home</a></li>
+		</ul>
+		<h3 class="text-muted">Diretores</h3>
+	</div>
+	<table class="table table-striped table-bordered" id="example"
+		   cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tfoot>
+			@for(filme <- filmes) {
+			<tr>
+				<th>G 
+					<a href="@routes.FilmeCRUD.detalhar(filme.getId())">
+						@filme.getNome() - @filme.getDiretor().getNome()
+					</a>
+				</th>
+			</tr>
+			}
+		</tfoot>
+	</table>
 </div>
 }

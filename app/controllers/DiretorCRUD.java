@@ -4,9 +4,8 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import models.Diretor;
 import java.util.List;
-import com.avaje.ebean.Ebean;
+import models.Diretor;
 import javax.inject.Inject;
 
 public class DiretorCRUD extends Controller {
@@ -16,9 +15,6 @@ public class DiretorCRUD extends Controller {
 	
 	public Result lista() {
 		List<Diretor> diretores = Diretor.find.findList();
-		for(Diretor diretor : diretores) {
-			System.out.println(diretor.getId() + " " + diretor.getNome());
-		}
 		return ok(views.html.diretor.render(diretores)); 
 	}
 	
@@ -37,6 +33,7 @@ public class DiretorCRUD extends Controller {
 		if(alterarForm.hasErrors()) {
 			return badRequest(views.html.alterarDiretor.render(id, alterarForm));
 		}
+		
 		atualForm.get().setNome(alterarForm.get().getNome());
 		atualForm.get().update();
 		flash("sucesso", "Diretor " + atualForm.get().getNome() + " e id " + atualForm.get().getId() + " alterado com sucesso!");

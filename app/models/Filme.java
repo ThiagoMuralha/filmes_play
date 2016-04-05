@@ -3,13 +3,11 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.avaje.ebean.Model.Finder;
+import com.avaje.ebean.Model;
 
 @Entity
-public class Filme {
+public class Filme extends Model {
 
 	private static final long serialVersionUID = 1l;
 	
@@ -33,10 +31,8 @@ public class Filme {
 	private Integer votos;
 	@Column
 	private String url;
-	@ManyToOne
-	@JoinColumn(name="id")
+	@ManyToOne	
 	private Diretor diretor;
-	
 	
 	// getters e setters
 	public Long getId() {
