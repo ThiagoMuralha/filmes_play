@@ -19,6 +19,8 @@ public class FilmeCRUD extends Controller {
 			System.out.println("Tá vazio");
 		else
 			System.out.println("Não tá vazio");
+		System.out.println("vai retornar");
+		System.out.println(filmes.isEmpty());
 		return ok(views.html.filme.render(filmes));
 	}
 	
@@ -31,7 +33,7 @@ public class FilmeCRUD extends Controller {
 	
 	
 	
-	 Result alterar(Long id) {
+	 public Result alterar(Long id) {
 		Form<Filme> atualForm = formFactory.form(Filme.class).fill(Filme.find.byId(id));		
 		Form<Filme> alterarForm = formFactory.form(Filme.class).bindFromRequest();
 		if(alterarForm.hasErrors()) {
@@ -63,11 +65,10 @@ public class FilmeCRUD extends Controller {
 	}
 	
 	
-	public Result gravar() { return redirect(routes.FilmeCRUD.lista());}
-	/*public Result gravar() {
+	
+	public Result gravar() {
 		Form<Filme> form = formFactory.form(Filme.class).bindFromRequest();
-		System.out.println(form.bindFromRequest().errors().toString());
-		if (form.bindFromRequest().hasErrors()) {
+		if(form.bindFromRequest().hasErrors()) {
 			flash("erro","Foram identificados problemas no cadastro!");
 			return ok(views.html.novoFilme.render(formFactory.form(Filme.class)));
 		}
@@ -76,5 +77,5 @@ public class FilmeCRUD extends Controller {
 			flash("sucesso", "Registro gravado com sucesso!");
 			return redirect(routes.FilmeCRUD.lista());
 		}
-	}*/
+	}
 }
