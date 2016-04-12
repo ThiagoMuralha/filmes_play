@@ -4,11 +4,31 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import models.Filme;
+import models.Diretor;
 import javax.inject.Inject;
 
 public class FilmeCRUD extends Controller {
+	
+	private Map<String, Long> diretoresNomes = new HashMap<>();
+	private List<String> diretoresNomesLista = new ArrayList<>();
+	
+	FilmeCRUD() {
+		List<Diretor> diretores = Diretor.find.all();
+		for (int i = 0; i < diretores.size(); i++) {
+			diretoresNomes.put(diretores.get(i).getNome(), diretores.get(i).getId());
+		}
+
+		for (int i = 0; i < diretores.size(); i++) {
+			diretoresNomesLista.add(diretores.get(i).getNome());
+		}
+	}
 	
 	@Inject
 	FormFactory formFactory;
@@ -41,7 +61,9 @@ public class FilmeCRUD extends Controller {
 		}
 		atualForm.get().setNome(alterarForm.get().getNome());
 		atualForm.get().update();
-		flash("sucesso", "Filme " + atualForm.get().getNome() + " e id " + atualForm.get().getId() + " alterado com sucesso!");
+		flash("sucesso", "Filme " + atualForm.get().getNome() + " e id " 
+															  + atualForm.get().getId() 
+															  + " alterado com sucesso!");
 		return redirect(routes.FilmeCRUD.lista());
 	}
 	
@@ -61,7 +83,8 @@ public class FilmeCRUD extends Controller {
 			System.out.println("O fera não ta nulo");
 		else
 			System.out.println("Tá nulo sim");
-		return ok(views.html.novoFilme.render(formFactory.form(Filme.class)));
+		return ok(views.html.novoFilme.render(formFactory.form(Filme.class), 
+											  Diretor.find.findList()));
 	}
 	
 	
@@ -69,8 +92,11 @@ public class FilmeCRUD extends Controller {
 	public Result gravar() {
 		Form<Filme> form = formFactory.form(Filme.class).bindFromRequest();
 		if(form.bindFromRequest().hasErrors()) {
+			System.out.println(form.bindFromRequest().errors().toString());
+			System.out.println(form.bindFromRequest().globalErrors());
 			flash("erro","Foram identificados problemas no cadastro!");
-			return ok(views.html.novoFilme.render(formFactory.form(Filme.class)));
+			return ok(views.html.novoFilme.render(formFactory.form(Filme.class), 
+												  Diretor.find.findList()));
 		}
 		else {
 			form.get().save();

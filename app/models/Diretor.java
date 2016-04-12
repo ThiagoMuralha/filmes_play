@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.*;
 import play.data.validation.Constraints;
 import com.avaje.ebean.Model;
@@ -15,6 +17,8 @@ public class Diretor extends Model {
 	private Long id;
 	@Constraints.Required
 	private String nome;
+	@OneToMany(mappedBy="diretor")
+	private List<Filme> filmes;
 	
 	// getters e setters
 	public Long getId() {
@@ -28,6 +32,9 @@ public class Diretor extends Model {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public List<Filme> getFilmes() {
+		return filmes;
 	}
 
 	public String toString() {

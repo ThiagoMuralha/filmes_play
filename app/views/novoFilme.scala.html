@@ -1,4 +1,6 @@
-@(filmeForm: play.data.Form[models.Filme])
+@(filmeForm: 			Form[Filme], 
+  diretores: 			List[Diretor])
+@import helper._
 @main("Novo filme") {
 	<div class="container">
 		<div class="header">
@@ -7,19 +9,53 @@
 			</ul>
 		</div>
 		<div>
-			@helper.form(action = routes.FilmeCRUD.gravar(), 'id -> "myForm", 'class -> "form-horizontal") {
+			@helper.form(action = routes.FilmeCRUD.gravar(), 'id -> "myForm", 
+								  'class -> "form-horizontal") {
 				<fieldset>
 					<legend>Novo filme</legend>
 					<div class="control-group">
 						<div class="controls">
-							@helper.inputText(filmeForm("Nome"), 'id -> "nome")
-							@helper.inputText(filmeForm("Ano"), 'id -> "ano")
-							@helper.inputText(filmeForm("Tipo"), 'id -> "tipo")
-							@helper.inputText(filmeForm("Nota"), 'id -> "nota")
-							@helper.inputText(filmeForm("Duração"), 'id -> "duracao")
-							@helper.inputText(filmeForm("Gênero"), 'id -> "genero")
-							@helper.inputText(filmeForm("Votos"), 'id -> "votos")
-							@helper.inputText(filmeForm("URL"), 'id -> "url")
+							@inputText(
+								filmeForm("ano"),
+								'_label -> "Ano LABEL", 
+								'id -> "ano"
+							)
+							@inputText(
+								filmeForm("tipo"),
+								'_label -> "Tipo LABEL",
+								'id -> "tipo"
+							)
+							@inputText(
+								filmeForm("nota"),
+								'_label -> "Nota LABEL",
+								'id -> "nota"
+							)
+							@inputText(
+								filmeForm("duracao"), 
+								'_label -> "Duração LABEL",
+								'id -> "duracao"
+							)
+							@inputText(
+								filmeForm("genero"),
+								'_label -> "Gênero LABEL",
+								'id -> "genero"
+							)
+							@inputText(
+								filmeForm("votos"), 
+								'_label -> "Votos LABEL",
+								'id -> "votos"
+							)
+							@inputText(
+								filmeForm("url"), 
+								'_label -> "URL LABEL",
+								'id -> "url"
+							)
+							@select(
+								filmeForm("diretor.id"),
+								options = diretores.map(diretor => diretor.getId().toString() -> 
+														diretor.getNome()),
+								'_label -> "Diretor LABEL"
+							)
 						</div>
 					</div>
 				</fieldset>
@@ -31,6 +67,17 @@
 					</div>
 				</div>
 			}
+			<form action="@routes.FilmeCRUD.gravar()" id="testeForm" method="post">
+				<input type="text" id="campo1" name="nome" 
+				value='@filmeForm.field("nome").value'/>
+				<select name="diretor.id" id="diretores">
+					@for(diretor <- diretores) {
+						<option 
+						value="@diretor.getId().toString()">@diretor.getNome()</option>
+					}
+				</select>
+				<button id="botao">Form 2</button>
+			</form>
 		</div>
 	</div>
 }

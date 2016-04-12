@@ -1,10 +1,16 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import com.avaje.ebean.Model;
+
+import play.data.validation.Constraints;
 
 @Entity
 public class Filme extends Model {
@@ -16,6 +22,7 @@ public class Filme extends Model {
 	@Id
 	private Long id;
 	@Column
+	@Constraints.Required
 	private String nome;
 	@Column
 	private String tipo;
@@ -31,8 +38,15 @@ public class Filme extends Model {
 	private Integer votos;
 	@Column
 	private String url;
-	@ManyToOne	
+	@ManyToOne
+	@JoinColumn(name="diretor_id")
 	private Diretor diretor;
+	
+	public static List<Filme> teste() {
+		
+		return find.findList();
+	}
+	
 	
 	// getters e setters
 	public Long getId() {
